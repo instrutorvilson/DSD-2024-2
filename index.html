@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="ola()">Ola</button>
+    <input type="text" placeholder="Informe cep" 
+           value="89701-000" 
+           onblur="getLogradouro(this.value)" />
+    <input type="text" placeholder="Informe rua" id="rua" disabled  />
+    <input type="text" placeholder="Informe bairro" id="bairro" disabled  />
+    <input type="text" placeholder="Informe cidade" id="cidade" disabled  />
+
+    <script>
+       function ola(){
+          alert('olá')
+        }
+
+       async function  getLogradouro(cep) {
+         const response = await fetch(`http://viacep.com.br/ws/${cep}/json/`)
+         const dados = await response.json()
+         document.getElementById('rua').value = dados.logradouro
+         document.getElementById('bairro').value = dados.bairro
+         document.getElementById('cidade').value = dados.localidade
+        
+       } 
+    </script>
+</body>
+</html>
